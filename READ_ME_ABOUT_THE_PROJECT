@@ -1,0 +1,35 @@
+Multistage Docker-Container Project Called "Vprofile" 
+
+
+
+Docker Images / Containers with their version
+
+1) mysql:8.0.33
+2) memcache:latest
+3) rabbitmq:latest
+4) maven:3.9.9-eclipse-temurin-21-jammy
+5) tomcat:10-jdk21
+6) nginx:latest
+
+
+So For DB, Web, App, I have created a Dockerfile against each in their own directory
+
+app :
+
+ 	 In this Dockerfile I have used multistage. Ar first Image I have used the based Image called Maven
+and then download the source code and change the branch and install the Maven
+
+	In the Second Stage I have copied the artifacts from first stage and put inside the Tomcat folder
+where the app is actually running, but at first I removed the default tomcat page.
+
+REASON FOR USING TWO STAGE ? WHY NOT ONE STAGE?
+
+	Well to answerr this question is pretty simple in the first stage when we install maven it also install too many dependencies and other things which we don't need at our images and it creates a huge size of image which is not efficent and good approach so we are only interested in the artifacts that why I used this approach
+
+
+db  :
+
+	ok In this I have used the official image from docker hub repository with sepcific version and I have also used the Envoirnmentle Variable for Password as it is Compulsory and execute the mysql by its'default Path
+
+
+
